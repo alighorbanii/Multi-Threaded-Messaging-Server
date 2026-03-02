@@ -1,0 +1,27 @@
+username array
+corresponding FILE* to write to that clients
+ 
+int numClients = 0;
+char usernames[MAXCLIENTS][MAXLENGTH];
+FILE* clientfps[MAXCLIENTS];
+ 
+server-child thread:
+ 
+	get "send userName message"
+	lookup userName in usernames[] array : strcmp()
+	found at index 
+	fprintf(clientfps[index], ....);
+ 
+main()
+	open wellknownfifo
+	while 
+		get clientfilename userName - you can use strtok()
+		copy userName into usernames[numClients] : strcpy()
+		clientfps[numClients] = fopen(clientfilename, "w");
+		create child thread (numClients);
+		numClients++;	
+
+
+
+Client:
+	in addition to client fifo, it should send username too.
